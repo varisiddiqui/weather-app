@@ -41,6 +41,10 @@ app.get('/api/weather', async (req, res) => {
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+// Ping route to keep server awake (for Render cron)
+app.get("/ping", (req, res) => {
+    res.status(200).json({ status: "alive", time: Date.now() });
+});
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
